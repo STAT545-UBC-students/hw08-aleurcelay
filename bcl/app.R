@@ -1,13 +1,15 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
-library(shinyjs)
+library(shinythemes)
+library(colourpicker)
 
 bcl <- read.csv("bcl-data.csv", stringsAsFactors = FALSE)
 
 ui <- fluidPage(
+  theme = shinytheme("united"),
   titlePanel("BC Liquor Store prices"),
-  img(src = "BClogo.png", height = 52.25, width = 500, align = "right"), #add logo
+  img(src = "BClogo.png", height = 52.25, width = 500, align = "right"), #add logo image
   sidebarLayout(
     sidebarPanel(
       sliderInput("priceInput", "Price", 0, 100, c(0, 35), pre = "$"),
@@ -17,10 +19,19 @@ ui <- fluidPage(
                    selected = "BEER",
                    inline = TRUE,
                    ),
-      uiOutput("countryOutput")
+      #Show prodcuts from all countries, but allow user to select specific country
+      checkboxInput("countryFilter", "Filter by country of origin", FALSE),
+      conditionalPanel(
+        condition = "input.countryFilter",
+        uiOutput("countryOutput")
+        ),
+        colourInput("col1", "Beers", "sandybrown", allowTransparent = TRUE, palette = "square", returnName = TRUE),
+        colourInput("col2", "Refreshments", "steelblue1", allowTransparent = TRUE,palette = "square", returnName = TRUE),
+        colourInput("col3", "Spirits", "indianred1", allowTransparent = TRUE,palette = "square", returnName = TRUE),
+        colourInput("col4", "Wine", "darkmagenta", allowTransparent = TRUE,palette = "square", returnName = TRUE)
     ),
     mainPanel(
-      textOutput("optionsText"),#outputs options found with user selection
+      textOutput("optionsText"),#to show options found with user selection
       #customize text output
       tags$head(tags$style("#optionsText{color: #DC143C;
                                  font-size: 25px;
@@ -56,7 +67,9 @@ server <- function(input, output) {
       filter(Price >= input$priceInput[1],
              Price <= input$priceInput[2],
              Type == input$typeInput,
+             if(input$countryFilter)
              Country == input$countryInput
+             else Country == Country
       )
   })
   
@@ -64,9 +77,14 @@ server <- function(input, output) {
     if (is.null(filtered())) {
       return(NULL)
     }
+    cols <- c("BEER" = input$col1, "REFRESHMENT" = input$col2, "SPIRITS" = input$col3, "WINE" = input$col4)
     ggplot(filtered(), aes(Alcohol_Content, fill = Type)) +
-      geom_histogram() +
-      labs(x = "Alcohol Content (%)")
+      geom_histogram(color = "black") +
+      scale_fill_manual(values=cols) +
+      #change and adjust axis labels
+      labs(x = "Alcohol Content (%)", y = "Number of Products")+ 
+      theme(axis.text = element_text(size = 18), 
+            axis.title=element_text(size=19))
   })
   
   output$results <- DT::renderDataTable({
@@ -78,7 +96,7 @@ server <- function(input, output) {
     if (is.null(optionsNumber)) {
       optionsNumber <- 0
     }
-    paste("We found", optionsNumber, "options to get you tipsy")
+    paste("We found", optionsNumber, "options to get you tipsy ☺")
   })
   
   output$download <- downloadHandler(
