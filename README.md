@@ -10,17 +10,17 @@ For this assignment, I added features to the BC Liquor shiny app. The original c
 ## Features added:
 
 * An image of the BC Liquor store logo
-* Interactive table:
+* Interactive table:  
 The table allows the user to sort by any variable from the table in ascending or descending order.
-* Choose multiple types of alcohol:
+* Choose multiple types of alcohol: 
 The user can now select more that one type of alcohol at the same time.
-* Number of options to get you tipsy ☺:
+* Number of options to get you tipsy ☺: 
 When the user makes some selections of price and/or product type and country of origin a message with the number of results shows up as "We found # options to get you tipsy ☺".
-* Download option:
+* Download option:  
 The user can download the current displayed options as a .csv file.
-* Show results from all countries:
+* Show results from all countries:  
 The user can decide wether to filter by country of origin or not (show all countries).
-* Select plot colors:
+* Select plot colors: 
 Default colors for each type of alcohol are displayed when opening the app, but the user can change each color by clicking the desired color in the palette, transparency is available so the user can choose any desired color/tone!
 
 
