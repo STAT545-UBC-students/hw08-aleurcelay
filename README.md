@@ -10,7 +10,7 @@ For this assignment, I added features to the BC Liquor shiny app. The original c
 ## Features added:
 
 ### **An image of the BC Liquor store logo**  
-![BC liquor store](bcl/www/BClogo.png = 500x52.5)
+![BC liquor store](bcl/www/BClogo.png = 250x)
 ### **Interactive table:**  
 The table allows the user to sort by any variable from the table in ascending or descending order.  
 ### **Choose multiple types of alcohol:** 
