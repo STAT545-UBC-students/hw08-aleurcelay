@@ -5,8 +5,8 @@ account: aleurcelay
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 584646
-bundleId: 1714532
+bundleId: 1714544
 url: https://aleurcelay.shinyapps.io/hw08app/
-when: 1542872554.76879
+when: 1542873237.2138
 asMultiple: FALSE
 asStatic: FALSE

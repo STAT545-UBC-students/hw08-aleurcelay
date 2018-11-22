@@ -3,6 +3,7 @@ library(ggplot2)
 library(dplyr)
 library(shinythemes)
 library(colourpicker)
+library(shinyWidgets)
 library(rsconnect)
 
 bcl <- read.csv("bcl-data.csv", stringsAsFactors = FALSE)
@@ -14,6 +15,7 @@ ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       sliderInput("priceInput", "Price", 0, 100, c(0, 35), pre = "$"),
+      setSliderColor("Crimson", 1), #change slider color to logo color
       #allow to select more than one type
       checkboxGroupInput("typeInput", "Product type",
                    choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
