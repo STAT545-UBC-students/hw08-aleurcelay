@@ -1,26 +1,31 @@
 library(shiny)
 library(ggplot2)
 library(dplyr)
+library(shinyjs)
 
 bcl <- read.csv("bcl-data.csv", stringsAsFactors = FALSE)
 
 ui <- fluidPage(
   titlePanel("BC Liquor Store prices"),
+  img(src = "BClogo.png", height = 52.25, width = 500, align = "right"),
   sidebarLayout(
     sidebarPanel(
-      sliderInput("priceInput", "Price", 0, 100, c(25, 40), pre = "$"),
-      radioButtons("typeInput", "Product type",
-                  choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
-                  selected = "WINE"),
+      sliderInput("priceInput", "Price", 0, 100, c(0, 35), pre = "$"),
+      checkboxGroupInput("typeInput", "Product type",
+                   choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
+                   selected = "BEER",
+                   inline = TRUE,
+                   ),
       uiOutput("countryOutput")
     ),
     mainPanel(
       plotOutput("coolplot"),
       br(), br(),
-      tableOutput("results")
+      DT::dataTableOutput("results")
+      )
     )
   )
-)
+
 
 server <- function(input, output) {
   output$countryOutput <- renderUI({
@@ -49,8 +54,8 @@ server <- function(input, output) {
     ggplot(filtered(), aes(Alcohol_Content)) +
       geom_histogram()
   })
-
-  output$results <- renderTable({
+  
+  output$results <- DT::renderDataTable({
     filtered()
   })
 }
