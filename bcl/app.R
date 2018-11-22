@@ -3,6 +3,7 @@ library(ggplot2)
 library(dplyr)
 library(shinythemes)
 library(colourpicker)
+library(rsconnect)
 
 bcl <- read.csv("bcl-data.csv", stringsAsFactors = FALSE)
 
@@ -25,6 +26,11 @@ ui <- fluidPage(
         condition = "input.countryFilter",
         uiOutput("countryOutput")
         ),
+      #Let the user filter by sweetness level
+      conditionalPanel(
+        condition = "input.typeInput =='WINE'",
+        uiOutput("sweetOutput")
+      ),
       #Select default colors for each type, but let the user decide the colors for the plot
         colourInput("col1", "Beers", "sandybrown", allowTransparent = TRUE, palette = "square", returnName = TRUE),
         colourInput("col2", "Refreshments", "steelblue1", allowTransparent = TRUE,palette = "square", returnName = TRUE),
@@ -57,6 +63,8 @@ server <- function(input, output) {
   })  
   
   filtered <- reactive({
+    filtered <- bcl
+    
     if (is.null(input$countryInput)) {
       return(NULL)
     }
@@ -64,14 +72,18 @@ server <- function(input, output) {
       return(NULL) #avoid an error when no type is selected
     }
     
-    bcl %>%
-      filter(Price >= input$priceInput[1],
+
+    #Filter type
+    filtered <- filter(filtered, Price >= input$priceInput[1],
              Price <= input$priceInput[2],
-             Type == input$typeInput,
-             if(input$countryFilter)
+             Type == input$typeInput)
+    
+    #Filter by country if the user chooses to do so
+     filtered <- filter(filtered, if(input$countryFilter){
              Country == input$countryInput
-             else Country == Country
-      )
+     }
+     else {Country == Country})
+           
   })
   
   output$coolplot <- renderPlot({
@@ -100,6 +112,7 @@ server <- function(input, output) {
     }
     paste("We found", optionsNumber, "options to get you tipsy ☺")
   })
+  
   
   output$download <- downloadHandler(
     filename = function() {
