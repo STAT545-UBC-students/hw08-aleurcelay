@@ -1,0 +1,12 @@
+name: hw08app
+title: hw08app
+username:
+account: aleurcelay
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 584646
+bundleId: 1714532
+url: https://aleurcelay.shinyapps.io/hw08app/
+when: 1542872554.76879
+asMultiple: FALSE
+asStatic: FALSE

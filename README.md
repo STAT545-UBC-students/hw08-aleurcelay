@@ -9,7 +9,7 @@ For this assignment, I added features to the BC Liquor shiny app. The original c
 
 ## The app
 To review my assignment, please use the following link to access the app:
-:star2:`[]()`
+:star2:`[Shiny App](https://aleurcelay.shinyapps.io/hw08app/)`
 
 
 ## Features added
