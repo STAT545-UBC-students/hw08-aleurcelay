@@ -8,7 +8,7 @@ Instructions for this assignment can be found [here](http://stat545.com/Classroo
 For this assignment, I added features to the BC Liquor shiny app. The original code and data for this app are from [Dean Attali's tutorial](https://deanattali.com/blog/building-shiny-apps-tutorial). The code can specifically be found [here](https://deanattali.com/blog/building-shiny-apps-tutorial/#12-final-shiny-app-code).
 
 ## The app
-To review my assignment, please use the following link to access the app:
+To review my assignment, please use the following link to access the app: 
 :star2:[Shiny App](https://aleurcelay.shinyapps.io/hw08app/)
 
 
@@ -32,7 +32,7 @@ The user can decide wether to filter by country of origin or not (show all count
 Default colors for each type of alcohol are displayed when opening the app, but the user can change each color by clicking the desired color in the palette, transparency is available so the user can choose any desired color/tone!
 
 ## Code
-If you want to see my code to generate the app:
+If you want to see my code to generate the app: 
 [App.R](bcl/app.R)
 
 
