@@ -9,6 +9,7 @@ For this assignment, I added features to the BC Liquor shiny app. The original c
 
 ## The app
 To review my assignment, please use the following link to access the app: 
+
 :star2:[Shiny App](https://aleurcelay.shinyapps.io/hw08app/)
 
 
@@ -33,6 +34,7 @@ Default colors for each type of alcohol are displayed when opening the app, but 
 
 ## Code
 If you want to see my code to generate the app: 
+
 [App.R](bcl/app.R)
 
 
