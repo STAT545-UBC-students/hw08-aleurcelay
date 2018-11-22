@@ -25,6 +25,7 @@ ui <- fluidPage(
         condition = "input.countryFilter",
         uiOutput("countryOutput")
         ),
+      #Select default colors for each type, but let the user decide the colors for the plot
         colourInput("col1", "Beers", "sandybrown", allowTransparent = TRUE, palette = "square", returnName = TRUE),
         colourInput("col2", "Refreshments", "steelblue1", allowTransparent = TRUE,palette = "square", returnName = TRUE),
         colourInput("col3", "Spirits", "indianred1", allowTransparent = TRUE,palette = "square", returnName = TRUE),
@@ -77,6 +78,7 @@ server <- function(input, output) {
     if (is.null(filtered())) {
       return(NULL)
     }
+    #Assign colors to the types
     cols <- c("BEER" = input$col1, "REFRESHMENT" = input$col2, "SPIRITS" = input$col3, "WINE" = input$col4)
     ggplot(filtered(), aes(Alcohol_Content, fill = Type)) +
       geom_histogram(color = "black") +
